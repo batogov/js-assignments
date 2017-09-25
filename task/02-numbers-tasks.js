@@ -22,7 +22,7 @@
  *   5, 5  => 25
  */
 function getRectangleArea(width, height) {
-    throw new Error('Not implemented');
+    return width * height;
 }
 
 
@@ -38,7 +38,7 @@ function getRectangleArea(width, height) {
  *   0    => 0
  */
 function getCicleCircumference(radius) {
-    throw new Error('Not implemented');
+    return 2 * Math.PI * radius;
 }
 
 /**
@@ -143,7 +143,7 @@ function getLastDigit(value) {
  * '-525.5'     => -525.5
  */
 function parseNumberFromString(value) {
-    throw new Error('Not implemented');
+    return +value;
 }
 
 /**
@@ -221,7 +221,8 @@ function isPrime(n) {
  *   toNumber(new Number(42), 0) => 42
  */
 function toNumber(value, def) {
-    throw new Error('Not implemented');
+    let number = parseInt(value);
+    return !isNaN(number) ? number : def;
 }
 
 module.exports = {

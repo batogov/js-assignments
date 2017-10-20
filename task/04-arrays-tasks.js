@@ -418,7 +418,7 @@ function toStringList(arr) {
  *      { country: 'Russia',  city: 'Saint Petersburg' },
  *      { country: 'Poland',  city: 'Krakow' },
  *      { country: 'Belarus', city: 'Brest' }
- *    ]  
+ *    ]
  *                      =>
  *    [
  *      { country: 'Belarus', city: 'Brest' },
@@ -448,7 +448,7 @@ function sortCitiesArray(arr) {
  *           [0,1,0,0,0],
  *     5 =>  [0,0,1,0,0],
  *           [0,0,0,1,0],
- *           [0,0,0,0,1]]   
+ *           [0,0,0,0,1]]
  */
 function getIdentityMatrix(n) {
    throw new Error('Not implemented');
@@ -468,7 +468,18 @@ function getIdentityMatrix(n) {
  *     3, 3   => [ 3 ]
  */
 function getIntervalArray(start, end) {
-   throw new Error('Not implemented');
+    const result = [];
+
+    // Хак с массивом необходимой длины, который заменяет цикл for
+    const blank = new Array(end - start + 1).fill(0);
+
+    let current = start;
+    blank.map(elem => {
+        result.push(current);
+        current++;
+    });
+
+    return result;
 }
 
 /**
@@ -483,7 +494,8 @@ function getIntervalArray(start, end) {
  *   [ 1, 1, 2, 2, 3, 3, 4, 4] => [ 1, 2, 3, 4]
  */
 function distinct(arr) {
-   throw new Error('Not implemented');
+    const set = new Set(arr);
+    return [...set];
 }
 
 /**
@@ -533,7 +545,11 @@ function group(array, keySelector, valueSelector) {
  *   ['one','two','three'], x=>x.split('')  =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
 function selectMany(arr, childrenSelector) {
-    throw new Error('Not implemented');
+    const result = [];
+    arr.map(value => {
+        result.push(...childrenSelector(value));
+    });
+    return result;
 }
 
 
@@ -550,7 +566,9 @@ function selectMany(arr, childrenSelector) {
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
 function getElementByIndexes(arr, indexes) {
-    throw new Error('Not implemented');
+    let current = arr;
+    indexes.map(index => current = current[index]);
+    return current;
 }
 
 
@@ -565,15 +583,28 @@ function getElementByIndexes(arr, indexes) {
  * 
  * @example
  *   [ 1, 2, 3, 4, 5 ]   =>  [ 4, 5, 3, 1, 2 ]
- *    \----/   \----/         
- *     head     tail 
+ *    \----/   \----/
+ *     head     tail
  *
- *   [ 1, 2 ]  => [ 2, 1 ] 
- *   [ 1, 2, 3, 4, 5, 6, 7, 8 ]   =>  [ 5, 6, 7, 8, 1, 2, 3, 4 ]   
+ *   [ 1, 2 ] => [ 2, 1 ]
+ *   [ 1, 2, 3, 4, 5, 6, 7, 8 ] => [ 5, 6, 7, 8, 1, 2, 3, 4 ]
  * 
  */
 function swapHeadAndTail(arr) {
-    throw new Error('Not implemented');
+    const middle = ~~(arr.length / 2);
+
+    if (arr.length % 2 === 0) {
+        return [
+            ...arr.slice(middle, arr.length),
+            ...arr.slice(0, middle)
+        ];
+    } else {
+        return [
+            ...arr.slice(middle + 1, arr.length),
+            arr[middle],
+            ...arr.slice(0, middle)
+        ];
+    }
 }
 
 
